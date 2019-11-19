@@ -1,0 +1,98 @@
+<h1>Products Detail</h1>
+<h4>{{title}}</h4>
+<p *ngIf="!productDetails"><em>Loading...</em></p>
+
+<button (click)="addProduct()" *ngIf="!showForm">Add New Product</button>
+
+<div class="row" *ngIf="!showForm">
+  <table class='table table-striped' *ngIf="productDetails">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Product Code</th>
+        <th>Manufacturer</th>
+        <th>Shipping No.</th>
+        <th>Serial No.</th>
+        <th>Batch No.</th>
+        <th>MRP</th>
+        <th>Quantity</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productDetails">
+        <td>{{product.productName}}</td>
+        <td>{{product.productCode}}</td>
+        <td>{{product.manufacturer}}</td>
+        <td>{{product.shippingNo}}</td>
+        <td>{{product.serialNo}}</td>
+        <td>{{product.batchNo}}</td>
+        <td>{{product.mrp}}</td>
+        <td>{{product.quantity}}</td>
+        <td>
+          <button (click)="editProduct(product.id)">Edit</button>
+          <button (click)="deleteProduct(product.id)">Delete</button>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Add product -->
+<div class="row" *ngIf="showForm">
+  <div class="col-md-4">
+    <div class="form-group row">
+      <label class=" control-label col-md-4">Product Code</label>
+      <div class="col-md-8">
+        <input class="form-control" type="text" [(ngModel)]="productdata.productCode" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class=" control-label col-md-4">Product Name</label>
+      <div class="col-md-8">
+        <input class="form-control" type="text" [(ngModel)]="productdata.productName" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class=" control-label col-md-4">Manufacturer</label>
+      <div class="col-md-8">
+        <input class="form-control" type="text" [(ngModel)]="productdata.manufacturer" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class=" control-label col-md-4">Shipping No</label>
+      <div class="col-md-8">
+        <input class="form-control" type="text" [(ngModel)]="productdata.shippingNo" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class=" control-label col-md-4">Serial No</label>
+      <div class="col-md-8">
+        <input class="form-control" type="number" [(ngModel)]="productdata.serialNo" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class=" control-label col-md-4">Batch No</label>
+      <div class="col-md-8">
+        <input class="form-control" type="text" [(ngModel)]="productdata.batchNo" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class=" control-label col-md-4">Price</label>
+      <div class="col-md-8">
+        <input class="form-control" type="number" [(ngModel)]="productdata.mrp" required>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class=" control-label col-md-4">Quantity</label>
+      <div class="col-md-8">
+        <input class="form-control" type="number" [(ngModel)]="productdata.quantity" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-default" (click)="saveProduct()">Save</button>
+      <button class="btn" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
